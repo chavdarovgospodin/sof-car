@@ -21,13 +21,6 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./
-          server-dir: public_html/sof-car.eu/
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/.github/**
-            **/README.md
-            **/.gitignore
-            **/.cpanel.yml
-            **/deploy.log
+          server-dir: /public_html/sof-car.eu/
+
           dry-run: false
