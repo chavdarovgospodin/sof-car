@@ -1,4 +1,4 @@
-name: Deploy to cPanel
+name: Deploy via FTP
 
 on:
   push:
@@ -7,12 +7,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v4
-      
-    - name: 📂 Sync files to cPanel
+    - uses: actions/checkout@v4
+    - name: FTP Deploy
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ${{ secrets.FTP_SERVER }}
@@ -20,11 +17,3 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./
         server-dir: /public_html/sof-car.eu/
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/node_modules/**
-          **/.github/**
-          **/README.md
-          **/.gitignore
-          **/.cpanel.yml
