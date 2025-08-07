@@ -1,27 +1,158 @@
-function sendEmail () {
-    const serviceID = 'service_cmvzmcb'
-    const templateID = 'template_gg7ylhh';
+function sendEmail() {
+  const serviceID = 'service_cmvzmcb';
+  const templateID = 'template_gg7ylhh';
 
-    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-    const phone = document.getElementById('phone').value;
+  const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
+  const phone = document.getElementById('phone').value.trim();
 
+  // Clear previous error styles
+  clearFieldErrors();
 
-    if(name !== '' && email.match(regex) && message !== '' && phone !== '') {
-        emailjs
-        .send(serviceID, templateID, {name: name, email: email, message: message, phone: phone})
-        .then((res)=> {
-            document.getElementById('name').value = '',
-            document.getElementById('email').value = '',
-            document.getElementById('message').value = '',
-            document.getElementById('phone').value = '',
-            alert('Запитването ви беше изпратено успешно.')
-        })
-        
-    } 
-    else {
-        alert('Моля попълнете всички полета') // to do use something else for alert
+  // Validate fields
+  let hasErrors = false;
+
+  if (name === '') {
+    showFieldError('name', 'Моля въведете Вашето име');
+    hasErrors = true;
+  }
+
+  if (email === '' || !email.match(regex)) {
+    showFieldError('email', 'Моля въведете валиден имейл адрес');
+    hasErrors = true;
+  }
+
+  if (phone === '') {
+    showFieldError('phone', 'Моля въведете телефонен номер');
+    hasErrors = true;
+  }
+
+  if (message === '') {
+    showFieldError('message', 'Моля въведете съобщение');
+    hasErrors = true;
+  }
+
+  if (hasErrors) {
+    return;
+  }
+
+  // Show loading state
+  const submitBtn = document.querySelector('button[onclick="sendEmail()"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Изпраща се...';
+  submitBtn.disabled = true;
+
+  emailjs
+    .send(serviceID, templateID, {
+      name: name,
+      email: email,
+      message: message,
+      phone: phone,
+    })
+    .then((res) => {
+      // Clear form
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('message').value = '';
+      document.getElementById('phone').value = '';
+
+      // Show success message
+      showSuccessMessage(
+        'Запитването ви беше изпратено успешно! Ще се свържем с Вас скоро.'
+      );
+
+      // Reset button
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    })
+    .catch((error) => {
+      console.error('EmailJS Error:', error);
+      showErrorMessage(
+        'Възникна грешка при изпращането. Моля опитайте отново или се обадете на 0879994212'
+      );
+
+      // Reset button
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    });
+}
+
+function showFieldError(fieldId, message) {
+  const field = document.getElementById(fieldId);
+  field.classList.add('error');
+  field.setAttribute('aria-invalid', 'true');
+
+  // Remove existing error message
+  const existingError = field.parentNode.querySelector('.error-message');
+  if (existingError) {
+    existingError.remove();
+  }
+
+  // Add error message
+  const errorDiv = document.createElement('div');
+  errorDiv.className = 'error-message';
+  errorDiv.textContent = message;
+  errorDiv.setAttribute('role', 'alert');
+  field.parentNode.appendChild(errorDiv);
+}
+
+function clearFieldErrors() {
+  const errorFields = document.querySelectorAll('.error');
+  errorFields.forEach((field) => {
+    field.classList.remove('error');
+    field.removeAttribute('aria-invalid');
+  });
+
+  const errorMessages = document.querySelectorAll('.error-message');
+  errorMessages.forEach((msg) => msg.remove());
+
+  const notifications = document.querySelectorAll('.notification');
+  notifications.forEach((notif) => notif.remove());
+}
+
+function showSuccessMessage(message) {
+  const notification = createNotification(message, 'success');
+  document.getElementById('contact-form').appendChild(notification);
+
+  // Auto remove after 5 seconds
+  setTimeout(() => {
+    if (notification.parentNode) {
+      notification.remove();
     }
-}   
+  }, 5000);
+}
+
+function showErrorMessage(message) {
+  const notification = createNotification(message, 'error');
+  document.getElementById('contact-form').appendChild(notification);
+
+  // Auto remove after 8 seconds
+  setTimeout(() => {
+    if (notification.parentNode) {
+      notification.remove();
+    }
+  }, 8000);
+}
+
+function createNotification(message, type) {
+  const notification = document.createElement('div');
+  notification.className = `notification ${type}`;
+  notification.setAttribute('role', 'alert');
+  notification.setAttribute('aria-live', 'polite');
+
+  const messageSpan = document.createElement('span');
+  messageSpan.textContent = message;
+
+  const closeBtn = document.createElement('button');
+  closeBtn.innerHTML = '&times;';
+  closeBtn.className = 'close-notification';
+  closeBtn.setAttribute('aria-label', 'Затвори съобщението');
+  closeBtn.onclick = () => notification.remove();
+
+  notification.appendChild(messageSpan);
+  notification.appendChild(closeBtn);
+
+  return notification;
+}
