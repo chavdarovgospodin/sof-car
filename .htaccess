@@ -1,0 +1,11 @@
+
+RewriteEngine on
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{HTTP_HOST} ^sof\-car\.eu$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.sof\-car\.eu$
+RewriteRule ^/?$ "https\:\/\/sof\-car\.eu\/" [R=301,L]
+RewriteCond %{HTTP_HOST} ^sof\-car\.valdimconstruction\.co\.uk$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.sof\-car\.valdimconstruction\.co\.uk$
+RewriteRule ^/?$ "https\:\/\/sof\-car\.eu\/" [R=301,L]
+
