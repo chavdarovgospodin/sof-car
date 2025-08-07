@@ -1370,6 +1370,13 @@ body.is-touch .tiles article .content {
 @media (max-width: 480px) {
   .img-logo {
     width: 130px !important;
+    margin-left: -20px;
+  }
+}
+
+@media (min-width: 481px) {
+  .img-logo {
+    margin-left: -40px;
   }
 }
 
