@@ -181,6 +181,14 @@
           <nav class="desktop-nav-toggle" aria-label="Главна навигация">
             <ul>
               <li>
+                <a
+                  aria-label="Информация за нас"
+                  class="scrolly"
+                  href="#reservation"
+                  >Резервация</a
+                >
+              </li>
+              <li>
                 <a aria-label="Информация за нас" class="scrolly" href="#about"
                   >За нас</a
                 >
@@ -257,6 +265,7 @@
           </h2>
         </section>
 
+        <!-- Reservation -->
         <section aria-label="Галерия с изображения на автомобили">
           <div
             id="carouselExampleIndicators"
@@ -345,6 +354,107 @@
         </section>
 
         <div class="inner">
+          <section
+            id="reservation"
+            class="quick-booking-section"
+            aria-labelledby="booking-title"
+          >
+            <div class="inner">
+              <div class="booking-container">
+                <div class="booking-header">
+                  <h2 id="booking-title">Резервирайте автомобил</h2>
+                  <p>Изберете дати и получете моментална оферта</p>
+                </div>
+
+                <form id="quick-booking-form" class="booking-form">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="pickup-date">Дата вземане</label>
+                      <input
+                        type="date"
+                        id="pickup-date"
+                        name="pickupDate"
+                        required
+                        min=""
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="return-date">Дата връщане</label>
+                      <input
+                        type="date"
+                        id="return-date"
+                        name="returnDate"
+                        required
+                        min=""
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="car-class">Клас автомобил</label>
+                      <select id="car-class" name="carClass" required>
+                        <option value="">Изберете клас</option>
+                        <option value="Икономичен">
+                          Икономичен (30 лв/ден)
+                        </option>
+                        <option value="Стандартен">
+                          Стандартен (50 лв/ден)
+                        </option>
+                        <option value="Луксозен">Луксозен (80 лв/ден)</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <button type="submit" class="btn-primary">
+                        <i class="fa fa-calculator" aria-hidden="true"></i>
+                        Изчисли цена
+                      </button>
+                    </div>
+                  </div>
+
+                  <div
+                    id="price-result"
+                    class="price-result"
+                    style="display: none"
+                  >
+                    <div class="price-info">
+                      <span class="days-count"></span>
+                      <span class="total-price"></span>
+                    </div>
+                    <button
+                      type="button"
+                      id="continue-booking"
+                      class="btn-secondary"
+                    >
+                      Продължи с резервацията
+                    </button>
+                  </div>
+
+                  <div
+                    id="booking-errors"
+                    class="booking-errors"
+                    style="display: none"
+                  ></div>
+                </form>
+
+                <div class="booking-info">
+                  <div class="info-item">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    <span>Минимум 5 дни наем</span>
+                  </div>
+                  <div class="info-item">
+                    <i class="fa fa-shield" aria-hidden="true"></i>
+                    <span>Пълно автокаско включено</span>
+                  </div>
+                  <div class="info-item">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    <span>Денонощна поддръжка</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <!-- About Us -->
           <section id="about" aria-labelledby="about-title">
             <div class="row">
@@ -717,5 +827,6 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/main2.js"></script>
     <script src="assets/js/index.js"></script>
+    <script src="assets/js/quick-booking.js"></script>
   </body>
 </html>
