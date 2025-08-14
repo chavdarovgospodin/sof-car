@@ -64,6 +64,11 @@
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/accessibility.css" />
     <link rel="stylesheet" href="assets/css/payment.css" />
+    <link rel="stylesheet" href="assets/css/modal.css" />
+    <link rel="stylesheet" href="assets/css/booking.css" />
+    <link rel="stylesheet" href="assets/css/footer.css" />
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="assets/css/tiles.css" />
     <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
     <noscript
       ><link rel="stylesheet" href="assets/css/noscript.css"
@@ -762,6 +767,16 @@
                   Yambol
                 </address>
               </li>
+              <li>
+                <span class="fas fa-building" aria-hidden="true"></span>
+                <a
+                  onclick="openCompanyModal()"
+                  class="modal-button"
+                  aria-label="Вижте данните за фирмата"
+                >
+                  Данни за фирмата
+                </a>
+              </li>
             </ul>
 
             <h2>Свържете се с нас</h2>
@@ -832,6 +847,43 @@
           </ul>
         </div>
       </footer>
+
+      <div id="companyModal" class="modal" onclick="closeCompanyModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+          <div class="modal-header">
+            <h2>Данни за фирмата</h2>
+            <span class="close" onclick="closeCompanyModal()">&times;</span>
+          </div>
+          <div class="modal-body">
+            <table class="company-data-table">
+              <tr>
+                <td><strong>Регистрирана търговска марка:</strong></td>
+                <td>Sof Car Rental</td>
+              </tr>
+              <tr>
+                <td><strong>Име на фирмата:</strong></td>
+                <td>СОФ-КАР 2016 ЕООД</td>
+              </tr>
+              <tr>
+                <td><strong>ЕИК:</strong></td>
+                <td>208062810</td>
+              </tr>
+              <tr>
+                <td><strong>Адрес на регистрация:</strong></td>
+                <td>БЪЛГАРИЯ, гр. Ямбол, СТИЛИЯНА ПАРАСКЕВОВА, 8, ет. 2</td>
+              </tr>
+              <tr>
+                <td><strong>Адрес за кореспонденция:</strong></td>
+                <td>Западна промишлена зона, Ямбол 8600, България</td>
+              </tr>
+              <tr>
+                <td><strong>Представляващи:</strong></td>
+                <td>Управител: ГЕОРГИ АПОСТОЛОВ КРЪСТЕВ</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
 
       <!-- Payment section -->
       <section id="payment-methods" class="payment-section-compact">
