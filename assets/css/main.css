@@ -480,6 +480,57 @@ header p {
   background-color: rgba(242, 132, 158, 0.1);
 }
 
+/* Font Awesome 5 Brand Icons Support */
+.icon.fab:before {
+  font-family: 'Font Awesome 5 Brands' !important;
+  font-weight: 400 !important;
+}
+
+.icon.fas:before {
+  font-family: 'Font Awesome 5 Free' !important;
+  font-weight: 900 !important;
+}
+
+.icon.far:before {
+  font-family: 'Font Awesome 5 Free' !important;
+  font-weight: 400 !important;
+}
+
+/* Social Media Icon Content & Hover Colors */
+.fa-viber:before {
+  content: '\f409';
+}
+
+.fa-whatsapp:before {
+  content: '\f232';
+}
+
+.fa-facebook:before {
+  content: '\f09a';
+}
+
+.fa-instagram:before {
+  content: '\f16d';
+}
+
+.icon.style2.fa-viber:hover {
+  color: #665cac;
+  border-color: #665cac;
+}
+
+.icon.style2.fa-viber:active {
+  background-color: rgba(102, 92, 172, 0.1);
+}
+
+.icon.style2.fa-whatsapp:hover {
+  color: #25d366;
+  border-color: #25d366;
+}
+
+.icon.style2.fa-whatsapp:active {
+  background-color: rgba(37, 211, 102, 0.1);
+}
+
 /* List */
 
 ol {
@@ -1763,7 +1814,7 @@ body.is-menu-visible #menu .close {
 /* Footer */
 
 #footer {
-  padding: 3em 0 2em 0;
+  padding: 3em 0 1em 0;
   background-color: #f6f6f6;
 }
 
@@ -1825,7 +1876,7 @@ body.is-menu-visible #menu .close {
 
 @media screen and (max-width: 1280px) {
   #footer {
-    padding: 3em 0 3em 0;
+    padding: 3em 0 0 0;
   }
 
   #footer > .inner section:nth-child(1) {
@@ -1853,7 +1904,7 @@ body.is-menu-visible #menu .close {
 
 @media screen and (max-width: 736px) {
   #footer {
-    padding: 3em 0 1em 0;
+    padding: 3em 0 0 0;
   }
 
   #footer > .inner {
@@ -2220,6 +2271,11 @@ body.is-menu-visible #menu .close {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
   margin-top: 2rem;
+}
+
+.booking-info .info-item i.fas {
+  font-family: 'Font Awesome 5 Free' !important;
+  font-weight: 900 !important;
 }
 
 .info-item {
