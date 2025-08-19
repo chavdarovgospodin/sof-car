@@ -46,11 +46,11 @@ function initQuickBooking() {
       // Пренасочване към пълната booking страница
       const bookingData = JSON.parse(sessionStorage.getItem('bookingData'));
       if (bookingData) {
-        // Пренасочване към booking.html
-        window.location.href = 'booking.html';
+        // Пренасочване към pages/booking.html
+        window.location.href = 'pages/booking.html';
       } else {
         // Ако няма данни, все пак пренасочваме
-        window.location.href = 'booking.html';
+        window.location.href = 'pages/booking.html';
       }
     });
   }

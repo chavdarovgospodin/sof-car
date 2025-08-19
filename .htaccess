@@ -14,3 +14,10 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 # Optional: Force non-www version (only if needed)
 # RewriteCond %{HTTP_HOST} ^www\.sof-car\.eu$ [NC]
 # RewriteRule ^(.*)$ https://sof-car.eu/$1 [R=301,L]
+
+# Redirects for moved pages to pages/ directory
+RewriteRule ^booking\.html$ /pages/booking.html [R=301,L]
+RewriteRule ^privacy-policy\.html$ /pages/privacy-policy.html [R=301,L]
+RewriteRule ^terms-conditions\.html$ /pages/terms-conditions.html [R=301,L]
+RewriteRule ^pricing\.html$ /pages/pricing.html [R=301,L]
+RewriteRule ^services\.html$ /pages/services.html [R=301,L]
