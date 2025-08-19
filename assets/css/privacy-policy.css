@@ -29,7 +29,8 @@
   padding-top: 0 !important;
 }
 
-.privacy-policy-page #main {
+.privacy-policy-page #main,
+.terms-conditions-page #main {
   padding-bottom: 0 !important;
 }
 
