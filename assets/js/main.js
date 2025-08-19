@@ -1,162 +1,124 @@
-(function($) {
+(function ($) {
+  var $window = $(window),
+    $header = $('#header'),
+    $body = $('body');
 
-	var	$window = $(window),
-		$header = $('#header'),
-		$body = $('body');
+  // Play initial animations on page load.
+  $window.on('load', function () {
+    window.setTimeout(function () {
+      $body.removeClass('is-preload');
+    }, 100);
+  });
 
-	// Play initial animations on page load.
-		$window.on('load', function() {
-			window.setTimeout(function() {
-				$body.removeClass('is-preload');
-			}, 100);
-		});
+  // Scrolly.
+  $('.scrolly').scrolly();
 
-	// Scrolly.
-		$('.scrolly').scrolly();
+  // Forms.
+  var $form = $('form');
 
-	// Forms.
-		var $form = $('form');
+  // Auto-resizing textareas.
+  $form.find('textarea').each(function () {
+    var $this = $(this),
+      $wrapper = $('<div class="textarea-wrapper"></div>'),
+      $submits = $this.find('input[type="submit"]');
 
-		// Auto-resizing textareas.
-			$form.find('textarea').each(function() {
+    $this
+      .wrap($wrapper)
+      .attr('rows', 1)
+      .css('overflow', 'hidden')
+      .css('resize', 'none')
+      .on('keydown', function (event) {
+        if (event.keyCode == 13 && event.ctrlKey) {
+          event.preventDefault();
+          event.stopPropagation();
 
-				var $this = $(this),
-					$wrapper = $('<div class="textarea-wrapper"></div>'),
-					$submits = $this.find('input[type="submit"]');
+          $(this).blur();
+        }
+      })
+      .on('blur focus', function () {
+        $this.val($.trim($this.val()));
+      })
+      .on('input blur focus --init', function () {
+        $wrapper.css('height', $this.height());
 
-				$this
-					.wrap($wrapper)
-					.attr('rows', 1)
-					.css('overflow', 'hidden')
-					.css('resize', 'none')
-					.on('keydown', function(event) {
+        $this
+          .css('height', 'auto')
+          .css('height', $this.prop('scrollHeight') + 'px');
+      })
+      .on('keyup', function (event) {
+        if (event.keyCode == 9) $this.select();
+      })
+      .triggerHandler('--init');
+  });
 
-						if (event.keyCode == 13
-						&&	event.ctrlKey) {
+  // Menu.
+  var $menu = $('#menu');
 
-							event.preventDefault();
-							event.stopPropagation();
+  $menu.wrapInner('<div class="inner"></div>');
 
-							$(this).blur();
+  $menu._locked = false;
 
-						}
+  $menu._lock = function () {
+    if ($menu._locked) return false;
 
-					})
-					.on('blur focus', function() {
-						$this.val($.trim($this.val()));
-					})
-					.on('input blur focus --init', function() {
+    $menu._locked = true;
 
-						$wrapper
-							.css('height', $this.height());
+    window.setTimeout(function () {
+      $menu._locked = false;
+    }, 350);
 
-						$this
-							.css('height', 'auto')
-							.css('height', $this.prop('scrollHeight') + 'px');
+    return true;
+  };
 
-					})
-					.on('keyup', function(event) {
+  $menu._show = function () {
+    if ($menu._lock()) $body.addClass('is-menu-visible');
+  };
 
-						if (event.keyCode == 9)
-							$this
-								.select();
+  $menu._hide = function () {
+    if ($menu._lock()) $body.removeClass('is-menu-visible');
+  };
 
-					})
-					.triggerHandler('--init');
+  $menu._toggle = function () {
+    if ($menu._lock()) $body.toggleClass('is-menu-visible');
+  };
 
-			});
+  $menu
+    .appendTo($body)
+    .on('click', function (event) {
+      event.stopPropagation();
+    })
+    .on('click', 'a', function (event) {
+      var href = $(this).attr('href');
 
-	// Menu.
-		var $menu = $('#menu');
+      event.preventDefault();
+      event.stopPropagation();
 
-		$menu.wrapInner('<div class="inner"></div>');
+      // Hide.
+      $menu._hide();
 
-		$menu._locked = false;
+      // Redirect.
+      if (href == '#menu') return;
 
-		$menu._lock = function() {
+      window.setTimeout(function () {
+        window.location.href = href;
+      }, 350);
+    })
+    .append('<a class="close" href="#menu">Close</a>');
 
-			if ($menu._locked)
-				return false;
+  $body
+    .on('click', 'a[href="#menu"]', function (event) {
+      event.stopPropagation();
+      event.preventDefault();
 
-			$menu._locked = true;
-
-			window.setTimeout(function() {
-				$menu._locked = false;
-			}, 350);
-
-			return true;
-
-		};
-
-		$menu._show = function() {
-
-			if ($menu._lock())
-				$body.addClass('is-menu-visible');
-
-		};
-
-		$menu._hide = function() {
-
-			if ($menu._lock())
-				$body.removeClass('is-menu-visible');
-
-		};
-
-		$menu._toggle = function() {
-
-			if ($menu._lock())
-				$body.toggleClass('is-menu-visible');
-
-		};
-
-		$menu
-			.appendTo($body)
-			.on('click', function(event) {
-				event.stopPropagation();
-			})
-			.on('click', 'a', function(event) {
-
-				var href = $(this).attr('href');
-
-				event.preventDefault();
-				event.stopPropagation();
-
-				// Hide.
-					$menu._hide();
-
-				// Redirect.
-					if (href == '#menu')
-						return;
-
-					window.setTimeout(function() {
-						window.location.href = href;
-					}, 350);
-
-			})
-			.append('<a class="close" href="#menu">Close</a>');
-
-		$body
-			.on('click', 'a[href="#menu"]', function(event) {
-
-				event.stopPropagation();
-				event.preventDefault();
-
-				// Toggle.
-					$menu._toggle();
-
-			})
-			.on('click', function(event) {
-
-				// Hide.
-					$menu._hide();
-
-			})
-			.on('keydown', function(event) {
-
-				// Hide on escape.
-					if (event.keyCode == 27)
-						$menu._hide();
-
-			});
-
+      // Toggle.
+      $menu._toggle();
+    })
+    .on('click', function (event) {
+      // Hide.
+      $menu._hide();
+    })
+    .on('keydown', function (event) {
+      // Hide on escape.
+      if (event.keyCode == 27) $menu._hide();
+    });
 })(jQuery);

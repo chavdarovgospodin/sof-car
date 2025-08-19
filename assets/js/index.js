@@ -156,3 +156,51 @@ function createNotification(message, type) {
 
   return notification;
 }
+
+// Company Modal Functions
+
+function openCompanyModal() {
+  const modal = document.getElementById('companyModal');
+  modal.style.display = 'block';
+
+  // Prevent body scrolling when modal is open
+  document.body.style.overflow = 'hidden';
+
+  // Add keyboard accessibility
+  modal.focus();
+
+  // Add escape key listener
+  document.addEventListener('keydown', handleModalKeydown);
+}
+
+function closeCompanyModal() {
+  const modal = document.getElementById('companyModal');
+  modal.style.display = 'none';
+
+  // Restore body scrolling
+  document.body.style.overflow = 'auto';
+
+  // Remove escape key listener
+  document.removeEventListener('keydown', handleModalKeydown);
+}
+
+function handleModalKeydown(event) {
+  // Close modal on Escape key
+  if (event.key === 'Escape') {
+    closeCompanyModal();
+  }
+}
+
+// Initialize modal functionality when DOM is loaded
+document.addEventListener('DOMContentLoaded', function () {
+  // Ensure modal exists before adding event listeners
+  const modal = document.getElementById('companyModal');
+  if (modal) {
+    // Close modal when clicking outside content area
+    modal.addEventListener('click', function (event) {
+      if (event.target === modal) {
+        closeCompanyModal();
+      }
+    });
+  }
+});

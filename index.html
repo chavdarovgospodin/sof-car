@@ -63,6 +63,12 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/accessibility.css" />
+    <link rel="stylesheet" href="assets/css/payment.css" />
+    <link rel="stylesheet" href="assets/css/modal.css" />
+    <link rel="stylesheet" href="assets/css/quick-booking.css" />
+    <link rel="stylesheet" href="assets/css/footer.css" />
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="assets/css/tiles.css" />
     <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
     <noscript
       ><link rel="stylesheet" href="assets/css/noscript.css"
@@ -187,6 +193,14 @@
               </li>
               <li>
                 <a
+                  aria-label="Информация за нас"
+                  class="scrolly"
+                  href="#reservation"
+                  >Резервация</a
+                >
+              </li>
+              <li>
+                <a
                   aria-label="Разгледай нашите автомобили"
                   class="scrolly"
                   href="#offers"
@@ -197,6 +211,46 @@
                 <a aria-label="Свържи се с нас" class="scrolly" href="#footer"
                   >Контакти</a
                 >
+              </li>
+              <li class="dropdown">
+                <a
+                  aria-label="Информация за нас"
+                  href="#"
+                  class="dropdown-toggle"
+                >
+                  Информация <i class="fa fa-chevron-down"></i>
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a
+                      href="pages/privacy-policy.html"
+                      aria-label="Политика за поверителност"
+                    >
+                      Политика за поверителност
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="pages/terms-conditions.html"
+                      aria-label="Общи условия"
+                    >
+                      Общи условия
+                    </a>
+                  </li>
+                  <li>
+                    <a href="pages/pricing.html" aria-label="Цени и тарифи">
+                      Цени и тарифи
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="pages/services.html"
+                      aria-label="Услуги и автомобили"
+                    >
+                      Услуги и автомобили
+                    </a>
+                  </li>
+                </ul>
               </li>
               <li>
                 <a
@@ -216,15 +270,23 @@
             role="navigation"
             aria-label="Мобилно меню"
           >
+            <a href="#" class="close" aria-label="Затвори меню"></a>
             <h2>Menu</h2>
             <ul>
               <li>
-                <a
-                  aria-label="Информация за нас"
-                  id="mobile-first"
-                  class="scrolly"
-                  href="#body"
+                <a aria-label="Начална страница" class="scrolly" href="#body"
+                  >Начало</a
+                >
+              </li>
+
+              <li>
+                <a aria-label="Информация за нас" class="scrolly" href="#about"
                   >За нас</a
+                >
+              </li>
+              <li>
+                <a aria-label="Резервация" class="scrolly" href="#reservation"
+                  >Резервация</a
                 >
               </li>
               <li>
@@ -239,6 +301,40 @@
                 <a aria-label="Свържи се с нас" class="scrolly" href="#footer"
                   >Контакти</a
                 >
+              </li>
+              <li class="dropdown">
+                <a aria-label="Информация за нас" href="#"> Информация </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a
+                      href="pages/privacy-policy.html"
+                      aria-label="Политика за поверителност"
+                    >
+                      Политика за поверителност
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="pages/terms-conditions.html"
+                      aria-label="Общи условия"
+                    >
+                      Общи условия
+                    </a>
+                  </li>
+                  <li>
+                    <a href="pages/pricing.html" aria-label="Цени и тарифи">
+                      Цени и тарифи
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="pages/services.html"
+                      aria-label="Услуги и автомобили"
+                    >
+                      Услуги и автомобили
+                    </a>
+                  </li>
+                </ul>
               </li>
             </ul>
           </nav>
@@ -257,6 +353,7 @@
           </h2>
         </section>
 
+        <!-- Reservation -->
         <section aria-label="Галерия с изображения на автомобили">
           <div
             id="carouselExampleIndicators"
@@ -345,6 +442,107 @@
         </section>
 
         <div class="inner">
+          <section
+            id="reservation"
+            class="quick-booking-section"
+            aria-labelledby="booking-title"
+          >
+            <div class="inner">
+              <div class="booking-container">
+                <div class="booking-header">
+                  <h2 id="booking-title">Резервирайте автомобил</h2>
+                  <p>Изберете дати и получете моментална оферта</p>
+                </div>
+
+                <form id="quick-booking-form" class="booking-form">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="pickup-date">Дата вземане</label>
+                      <input
+                        type="date"
+                        id="pickup-date"
+                        name="pickupDate"
+                        required
+                        min=""
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="return-date">Дата връщане</label>
+                      <input
+                        type="date"
+                        id="return-date"
+                        name="returnDate"
+                        required
+                        min=""
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="car-class">Клас автомобил</label>
+                      <select id="car-class" name="carClass" required>
+                        <option value="">Изберете клас</option>
+                        <option value="Икономика">
+                          Икономичен (30 лв/ден)
+                        </option>
+                        <option value="Стандартен">
+                          Стандартен (50 лв/ден)
+                        </option>
+                        <option value="Луксозен">Луксозен (80 лв/ден)</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <button type="submit" class="btn-primary">
+                        <i class="fa fa-calculator" aria-hidden="true"></i>
+                        Изчисли цена
+                      </button>
+                    </div>
+                  </div>
+
+                  <div
+                    id="price-result"
+                    class="price-result"
+                    style="display: none"
+                  >
+                    <div class="price-info">
+                      <span class="days-count"></span>
+                      <span class="total-price"></span>
+                    </div>
+                    <button
+                      type="button"
+                      id="continue-booking"
+                      class="btn-secondary"
+                    >
+                      Продължи с резервацията
+                    </button>
+                  </div>
+
+                  <div
+                    id="booking-errors"
+                    class="booking-errors"
+                    style="display: none"
+                  ></div>
+                </form>
+
+                <div class="booking-info">
+                  <div class="info-item">
+                    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                    <span>Минимум 5 дни наем</span>
+                  </div>
+                  <div class="info-item">
+                    <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                    <span>Пълно автокаско включено</span>
+                  </div>
+                  <div class="info-item">
+                    <i class="fas fa-phone" aria-hidden="true"></i>
+                    <span>Денонощна поддръжка</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <!-- About Us -->
           <section id="about" aria-labelledby="about-title">
             <div class="row">
@@ -651,6 +849,16 @@
                   Yambol
                 </address>
               </li>
+              <li>
+                <span class="fas fa-building" aria-hidden="true"></span>
+                <a
+                  onclick="openCompanyModal()"
+                  class="modal-button"
+                  aria-label="Вижте данните за фирмата"
+                >
+                  Данни за фирмата
+                </a>
+              </li>
             </ul>
 
             <h2>Свържете се с нас</h2>
@@ -709,6 +917,28 @@
               >. All Rights Reserved
             </li>
             <li>
+              <a
+                aria-label="Политика за поверителност"
+                href="privacy-policy.html"
+                >Политика за поверителност</a
+              >
+            </li>
+            <li>
+              <a aria-label="Общи условия" href="terms-conditions.html"
+                >Общи условия</a
+              >
+            </li>
+            <li>
+              <a aria-label="Цени и тарифи" href="pricing.html"
+                >Цени и тарифи</a
+              >
+            </li>
+            <li>
+              <a aria-label="Услуги и автомобили" href="services.html"
+                >Услуги и автомобили</a
+              >
+            </li>
+            <li>
               Designed by
               <a
                 aria-label="Свържете се с дизайнера в LinkedIn"
@@ -721,6 +951,82 @@
           </ul>
         </div>
       </footer>
+
+      <div id="companyModal" class="modal" onclick="closeCompanyModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+          <div class="modal-header">
+            <h2>Данни за фирмата</h2>
+            <span class="close" onclick="closeCompanyModal()">&times;</span>
+          </div>
+          <div class="modal-body">
+            <table class="company-data-table">
+              <tr>
+                <td><strong>Регистрирана търговска марка:</strong></td>
+                <td>Sof Car Rental</td>
+              </tr>
+              <tr>
+                <td><strong>Име на фирмата:</strong></td>
+                <td>СОФ-КАР 2016 ЕООД</td>
+              </tr>
+              <tr>
+                <td><strong>ЕИК:</strong></td>
+                <td>208062810</td>
+              </tr>
+              <tr>
+                <td><strong>Адрес на регистрация:</strong></td>
+                <td>БЪЛГАРИЯ, гр. Ямбол, СТИЛИЯНА ПАРАСКЕВОВА, 8, ет. 2</td>
+              </tr>
+              <tr>
+                <td><strong>Адрес за кореспонденция:</strong></td>
+                <td>Западна промишлена зона, Ямбол 8600, България</td>
+              </tr>
+              <tr>
+                <td><strong>Представляващи:</strong></td>
+                <td>Управител: ГЕОРГИ АПОСТОЛОВ КРЪСТЕВ</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment section -->
+      <section id="payment-methods" class="payment-section-compact">
+        <div class="inner">
+          <div class="payment-strip">
+            <!-- SSL/Security Badge -->
+            <div class="security-badge">
+              <i class="fas fa-lock" aria-hidden="true"></i>
+              <span>SSL</span>
+            </div>
+
+            <!-- Eco/Safe Badge -->
+            <div class="eco-badge">
+              <i class="fas fa-leaf" aria-hidden="true"></i>
+              <span>SAFE</span>
+            </div>
+
+            <!-- Payment Cards -->
+            <div class="payment-cards-compact">
+              <i class="fab fa-cc-visa" aria-hidden="true" title="Visa"></i>
+              <i
+                class="fab fa-cc-mastercard"
+                aria-hidden="true"
+                title="MasterCard"
+              ></i>
+            </div>
+
+            <!-- 3DS Protection -->
+            <div class="protection-badge">
+              <i class="fas fa-shield-alt" aria-hidden="true"></i>
+              <span>3DS2 PROTECTED</span>
+            </div>
+          </div>
+
+          <p class="payment-note">
+            Сигурни плащания с Visa Secure & MasterCard Identity Check
+          </p>
+        </div>
+      </section>
     </div>
     <!-- Scripts -->
     <script
@@ -736,8 +1042,12 @@
     <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/jquery.scrolly.min.js"></script>
     <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/components/header.js"></script>
+    <script src="assets/js/components/footer.js"></script>
+    <script src="assets/js/components/carousel.js"></script>
+    <script src="assets/js/components/forms.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/main2.js"></script>
     <script src="assets/js/index.js"></script>
+    <script src="assets/js/quick-booking.js"></script>
   </body>
 </html>

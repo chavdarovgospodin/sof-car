@@ -1,3 +1,7 @@
+User-agent: *
+Allow: /
+
+# Allow all search engines
 User-agent: Googlebot
 Disallow:
 
@@ -6,3 +10,6 @@ Disallow:
 
 User-agent: Googlebot-Image
 Disallow:
+
+# Sitemap location
+Sitemap: https://sofcar-yambol.bg/sitemap.xml
