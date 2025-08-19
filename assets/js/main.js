@@ -1,162 +1,66 @@
-(function($) {
+// Main Application Entry Point
+(function ($) {
+  'use strict';
 
-	var	$window = $(window),
-		$header = $('#header'),
-		$body = $('body');
+  // Main App Class
+  class MainApp {
+    constructor() {
+      this.$window = $(window);
+      this.$body = $('body');
+      this.components = {};
+      this.init();
+    }
 
-	// Play initial animations on page load.
-		$window.on('load', function() {
-			window.setTimeout(function() {
-				$body.removeClass('is-preload');
-			}, 100);
-		});
+    init() {
+      // Remove preload class after page load
+      this.$window.on('load', () => {
+        setTimeout(() => {
+          this.$body.removeClass('is-preload');
+        }, 100);
+      });
 
-	// Scrolly.
-		$('.scrolly').scrolly();
+      // Initialize components
+      this.initializeComponents();
 
-	// Forms.
-		var $form = $('form');
+      // Initialize scrolly
+      this.initializeScrolly();
+    }
 
-		// Auto-resizing textareas.
-			$form.find('textarea').each(function() {
+    initializeComponents() {
+      // Initialize Header Component
+      if (typeof HeaderComponent !== 'undefined') {
+        this.components.header = new HeaderComponent();
+      }
 
-				var $this = $(this),
-					$wrapper = $('<div class="textarea-wrapper"></div>'),
-					$submits = $this.find('input[type="submit"]');
+      // Initialize Footer Component
+      if (typeof FooterComponent !== 'undefined') {
+        this.components.footer = new FooterComponent();
+      }
 
-				$this
-					.wrap($wrapper)
-					.attr('rows', 1)
-					.css('overflow', 'hidden')
-					.css('resize', 'none')
-					.on('keydown', function(event) {
+      // Initialize Carousel Component (only on pages with carousel)
+      if (
+        typeof CarouselComponent !== 'undefined' &&
+        document.getElementById('carouselExampleIndicators')
+      ) {
+        this.components.carousel = new CarouselComponent();
+      }
 
-						if (event.keyCode == 13
-						&&	event.ctrlKey) {
+      // Initialize Forms Component
+      if (typeof FormsComponent !== 'undefined') {
+        this.components.forms = new FormsComponent();
+      }
+    }
 
-							event.preventDefault();
-							event.stopPropagation();
+    initializeScrolly() {
+      // Initialize scrolly for smooth scrolling
+      if ($.fn.scrolly) {
+        $('.scrolly').scrolly();
+      }
+    }
+  }
 
-							$(this).blur();
-
-						}
-
-					})
-					.on('blur focus', function() {
-						$this.val($.trim($this.val()));
-					})
-					.on('input blur focus --init', function() {
-
-						$wrapper
-							.css('height', $this.height());
-
-						$this
-							.css('height', 'auto')
-							.css('height', $this.prop('scrollHeight') + 'px');
-
-					})
-					.on('keyup', function(event) {
-
-						if (event.keyCode == 9)
-							$this
-								.select();
-
-					})
-					.triggerHandler('--init');
-
-			});
-
-	// Menu.
-		var $menu = $('#menu');
-
-		$menu.wrapInner('<div class="inner"></div>');
-
-		$menu._locked = false;
-
-		$menu._lock = function() {
-
-			if ($menu._locked)
-				return false;
-
-			$menu._locked = true;
-
-			window.setTimeout(function() {
-				$menu._locked = false;
-			}, 350);
-
-			return true;
-
-		};
-
-		$menu._show = function() {
-
-			if ($menu._lock())
-				$body.addClass('is-menu-visible');
-
-		};
-
-		$menu._hide = function() {
-
-			if ($menu._lock())
-				$body.removeClass('is-menu-visible');
-
-		};
-
-		$menu._toggle = function() {
-
-			if ($menu._lock())
-				$body.toggleClass('is-menu-visible');
-
-		};
-
-		$menu
-			.appendTo($body)
-			.on('click', function(event) {
-				event.stopPropagation();
-			})
-			.on('click', 'a', function(event) {
-
-				var href = $(this).attr('href');
-
-				event.preventDefault();
-				event.stopPropagation();
-
-				// Hide.
-					$menu._hide();
-
-				// Redirect.
-					if (href == '#menu')
-						return;
-
-					window.setTimeout(function() {
-						window.location.href = href;
-					}, 350);
-
-			})
-			.append('<a class="close" href="#menu">Close</a>');
-
-		$body
-			.on('click', 'a[href="#menu"]', function(event) {
-
-				event.stopPropagation();
-				event.preventDefault();
-
-				// Toggle.
-					$menu._toggle();
-
-			})
-			.on('click', function(event) {
-
-				// Hide.
-					$menu._hide();
-
-			})
-			.on('keydown', function(event) {
-
-				// Hide on escape.
-					if (event.keyCode == 27)
-						$menu._hide();
-
-			});
-
+  // Initialize main app when DOM is ready
+  $(document).ready(() => {
+    window.mainApp = new MainApp();
+  });
 })(jQuery);
