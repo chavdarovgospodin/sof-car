@@ -43,19 +43,14 @@ function initQuickBooking() {
 
   if (continueBtn) {
     continueBtn.addEventListener('click', function () {
-      // Тук ще пренасочим към пълната booking страница
-      // За сега показваме съобщение
+      // Пренасочване към пълната booking страница
       const bookingData = JSON.parse(sessionStorage.getItem('bookingData'));
       if (bookingData) {
-        alert(
-          'Сега ще ви пренасочим към пълната форма за резервация.\n\nВашите данни са запазени:\n' +
-            `• Период: ${bookingData.pickupDate} до ${bookingData.returnDate}\n` +
-            `• Клас: ${bookingData.carClass}\n` +
-            `• Цена: ${bookingData.totalPrice} лв`
-        );
-
-        // TODO: Тук ще добавим пренасочване към booking.html
-        // window.location.href = 'booking.html';
+        // Пренасочване към booking.html
+        window.location.href = 'booking.html';
+      } else {
+        // Ако няма данни, все пак пренасочваме
+        window.location.href = 'booking.html';
       }
     });
   }
