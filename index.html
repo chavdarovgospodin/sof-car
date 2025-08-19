@@ -230,14 +230,21 @@
             role="navigation"
             aria-label="Мобилно меню"
           >
+            <a href="#" class="close" aria-label="Затвори меню"></a>
             <h2>Menu</h2>
             <ul>
               <li>
-                <a
-                  aria-label="Информация за нас"
-                  id="mobile-first"
-                  class="scrolly"
-                  href="#body"
+                <a aria-label="Начална страница" class="scrolly" href="#body"
+                  >Начало</a
+                >
+              </li>
+              <li>
+                <a aria-label="Резервация" class="scrolly" href="#reservation"
+                  >Резервация</a
+                >
+              </li>
+              <li>
+                <a aria-label="Информация за нас" class="scrolly" href="#about"
                   >За нас</a
                 >
               </li>
@@ -400,7 +407,7 @@
                       <label for="car-class">Клас автомобил</label>
                       <select id="car-class" name="carClass" required>
                         <option value="">Изберете клас</option>
-                        <option value="Икономичен">
+                        <option value="Икономика">
                           Икономичен (30 лв/ден)
                         </option>
                         <option value="Стандартен">
